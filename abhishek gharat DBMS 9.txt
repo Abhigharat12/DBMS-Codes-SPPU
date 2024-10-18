@@ -1,0 +1,507 @@
+﻿
+Please enter a MongoDB connection string (Default: mongodb://localhost/): mongodb: 
+mongodb: 
+Current Mongosh Log ID: 651a4730afa7b5d7be217232 
+Connecting to: 
+mongodb://127.0.0.1:27017/mongodb?directConnection=true&serverSelectionTimeoutMS=2000
+&appName=mongosh+1.10.6 
+Using MongoDB: 7.0.1 Using Mongosh: 1.10.6 
+mongosh 2.0.1 is available for download: https://www.mongodb.com/try/download/shell 
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/ 
+------ 
+   The server generated these startup warnings when booting 
+   2023-09-30T22:09:56.935+05:30: Access control is not enabled for the database.  
+   Read and write access to data and configuration is unrestricted 
+------ 
+ 
+mongodb> use AK 
+switched to db AK 
+ 
+AK> db.createCollection('Student'); 
+{ ok: 1 } 
+AK> db.Student.insertMany([{ 'Rno': '1', 'Name': 'Atharva', 'Class': 'TE Computer' },  
+ { 'Rno': '2', 'Name': 'Shubham', 'Class': 'TE Computer' },  
+ { 'Rno': '3', 'Name': 'Yash', 'Class': 'TE Computer' },  
+ { 'Rno': '4', 'Name': 'Nikita', 'Class': 'TE Computer' },  
+ { 'Rno': '5', 'Name': 'Nikhil', 'Class': 'TE Computer' },  
+ { 'Rno': '6', 'Name': 'Nikhil', 'Class': 'TE Computer' }]); 
+ 
+{ 
+  acknowledged: true, 
+  insertedIds:  
+  { '0': ObjectId("651a47c4afa7b5d7be217233"), 
+    '1': ObjectId("651a47c4afa7b5d7be217234"), 
+    '2': ObjectId("651a47c4afa7b5d7be217235"), 
+    '3': ObjectId("651a47c4afa7b5d7be217236"), 
+    '4': ObjectId("651a47c4afa7b5d7be217237"), 
+    '5': ObjectId("651a47c4afa7b5d7be217238") 
+  } 
+} 
+ 
+AK> db.Student.find(); 
+[ 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217233"), 
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217234"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+
+
+
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217235"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217236"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217237"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217238"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+AK> db.Student.find().pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217233"), 
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217234"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217235"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217236"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217237"), 
+    Rno: '5', 
+
+
+
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217238"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+AK> db.Student.update({'Name':'Atharva'},{$set:{'Name':'Shivraj'}}); 
+DeprecationWarning: Collection.update() is deprecated.  
+Use updateOne, updateMany, or bulkWrite. 
+{ 
+  acknowledged: true, 
+  insertedId: null, 
+  matchedCount: 1, 
+  modifiedCount: 1, 
+  upsertedCount: 0 
+} 
+ 
+ 
+AK> db.Student.find().pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217233"), 
+    Rno: '1', 
+    Name: 'Shivraj', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217234"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217235"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217236"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217237"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+
+
+
+  { 
+    _id: ObjectId("651a47c4afa7b5d7be217238"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+AK> db.Student.deleteOne({'Rno':'6'}); 
+{ acknowledged: true, deletedCount: 1 } 
+ 
+ 
+AK> db.Student.find().pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd80"), 
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd81"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+AK> db.Student.insertOne({'Rno':'6','Name':'Nikhil','Class':'TE COMPUTER'}); 
+{ 
+  acknowledged: true, 
+  insertedId: ObjectId("65212b5cab4dfc111e000350") 
+} 
+AK> db.Student.find().pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd80"), 
+
+
+
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd81"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("65212b5cab4dfc111e000350"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE COMPUTER' 
+  } 
+] 
+ 
+AK> db.Student.find({$and:[{'Name':'Nikita'},{'Rno':'4'}]}); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+AK> db.Student.find({$or:[{'Name':'Nikita'},{'Rno':'3'}]}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+
+
+
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+AK> db.Student.find({$nor:[{'Name':'Nikita'},{'Rno':'3'}]}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd80"), 
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd81"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("65212b5cab4dfc111e000350"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE COMPUTER' 
+  } 
+] 
+ 
+AK> db.Student.find( {"Rno": { $not:{$lt:"3"}}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+
+
+
+  { 
+    _id: ObjectId("65212b5cab4dfc111e000350"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE COMPUTER' 
+  } 
+] 
+ 
+ 
+AK> db.Student.find( {"Rno": { $eq:"5"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+ 
+AK> db.Student.find( {"Rno": { $ne:"5"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd80"), 
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd81"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("65212b5cab4dfc111e000350"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE COMPUTER' 
+  } 
+] 
+ 
+ 
+
+
+
+AK> db.Student.find( {"Rno": { $gt:"5"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("65212b5cab4dfc111e000350"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE COMPUTER' 
+  } 
+] 
+ 
+AK> db.Student.find( {"Rno": { $gte:"5"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("65212b5cab4dfc111e000350"), 
+    Rno: '6', 
+    Name: 'Nikhil', 
+    Class: 'TE COMPUTER' 
+  } 
+] 
+ 
+AK> db.Student.find( {"Rno": { $lt:"5"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd80"), 
+    Rno: '1', 
+    Name: 'Atharva', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd81"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+ 
+
+
+
+AK> db.Student.find( {"Rno": { $lt:"5",$gt:"2"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  } 
+] 
+ 
+ 
+AK> db.Student.find( {"Rno": { $lte:"5",$gte:"2"}}).pretty(); 
+[ 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd81"), 
+    Rno: '2', 
+    Name: 'Shubham', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd82"), 
+    Rno: '3', 
+    Name: 'Yash', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4d4fe64b91d30b77bd83"), 
+    Rno: '4', 
+    Name: 'Nikita', 
+    Class: 'TE Computer' 
+  }, 
+  { 
+    _id: ObjectId("651a4e7fe64b91d30b77bd86"), 
+    Rno: '5', 
+    Name: 'Nikhil', 
+    Class: 'TE Computer' 
+  } 
+]

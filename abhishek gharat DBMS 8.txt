@@ -1,0 +1,206 @@
+﻿
+import java.awt.*; 
+import java.awt.event.*; 
+import java.sql.Connection; 
+import java.sql.DriverManager; 
+import java.sql.ResultSet; 
+import java.sql.Statement; 
+import javax.swing.*; 
+ 
+public class student extends JFrame implements 
+ActionListener 
+{ 
+ JFrame f; 
+ JLabel l1, l2,l3,l4; 
+ JTextField t1, t2,t3; 
+ JButton b1, b2, b3, b4, b5; 
+ Connection c; 
+ Statement s; 
+ ResultSet r; 
+ student () 
+ { 
+  try 
+  { 
+   f=new JFrame("Student Form"); 
+   f.setLayout(null);f.setVisible(true); 
+   f.setSize(700, 500); 
+   l4=new JLabel("Student Management System"); 
+   //l4.setBounds(100,01,250,250); 
+   l4.setBounds(100, 30, 400, 30); 
+   f.add(l4); 
+   l4.setForeground(Color.blue); 
+   l4.setFont(new Font("Serif", Font.BOLD,30)); 
+   l1=new JLabel("Stud_RollNo"); 
+   l1.setBounds(50, 70, 100, 50); 
+   f.add(l1); 
+   l2=new JLabel("Stud_Name"); 
+   l2.setBounds(50, 120, 100, 50); 
+   f.add(l2); 
+   l3=new JLabel("Stud_Dept"); 
+   l3.setBounds(50, 170, 100, 50); 
+   f.add(l3); 
+   t1=new JTextField(); 
+   t1.setBounds(150, 90, 100, 30); 
+   f.add(t1); 
+   t2=new JTextField(); 
+   t2.setBounds(150, 140, 100, 30); 
+   f.add(t2);t3=new JTextField(); 
+   t3.setBounds(150, 190, 100, 30); 
+   f.add(t3); 
+   b1= new JButton("ADD"); 
+   b1.setBounds(200, 300, 75, 50); 
+   f.add(b1); 
+   b1.addActionListener(this); 
+   b2= new JButton("EDIT"); 
+
+
+
+   b2.setBounds(300, 300, 75, 50); 
+   f.add(b2); 
+   b2.addActionListener(this); 
+   b3= new JButton("DELETE"); 
+   b3.setBounds(400, 300, 75, 50); 
+   f.add(b3); 
+   b3.addActionListener(this); 
+   b5= new JButton("EXIT"); 
+   b5.setBounds(500, 300, 75, 50); 
+   f.add(b5); 
+   b5.addActionListener(this); 
+   Class.forName("com.mysql.jdbc.Driver"); 
+   c=DriverManager.getConnection("jdbc:mysql://loca 
+   lhost:3306/info","root","root");s=c.createStatement(); 
+  } 
+   
+  catch(Exception e) 
+  { 
+   System.out.println(e); 
+  } 
+ } //ends INS Constructor 
+  
+public void actionPerformed(ActionEvent ae) 
+{ 
+ try 
+ { 
+  if(ae.getSource()==b1) 
+  { 
+   String s1="INSERT 
+   INTO result(stud_RollNo,stud_Name,stud_Dept) 
+  VALUES("'+t1.getText()+'","'+t2.getText() +'","'+t3.getText() + "'); 
+   System.out.println(s1); 
+   s.executeUpdate(s1); 
+   r=s.executeQuery("SELECT * FROM result"); 
+   t1.setText(""); 
+   t2.setText(""); 
+   t3.setText(""); 
+  } 
+  else if(ae.getSource()==b2) 
+  { 
+   String s2="UPDATE user1 SET 
+   stud_Name="'+t2.getText()+'" WHERE 
+   stud_RollNo="+t1.getText()"; 
+   System.out.println(s2); 
+   s.executeUpdate(s2); 
+   r=s.executeQuery("SELECT * FROM result"); 
+   t1.setText(""); 
+   t2.setText("");t3.setText(""); 
+  } 
+  else if(ae.getSource()==b3) 
+  { 
+   String s3="DELETE FROM result WHERE 
+   stud_RollNo="+t1.getText()"; 
+   System.out.println(s3); 
+   s.executeUpdate(s3); 
+
+
+
+   r=s.executeQuery("SELECT * FROM result"); 
+   t1.setText(""); 
+   t2.setText(""); 
+   t3.setText(""); 
+  } 
+  else if(ae.getSource()==b5) 
+  { 
+   System.exit(0);  
+  } 
+ } 
+   
+  catch(Exception e) 
+  { 
+   System.out.println(e); 
+  } 
+} 
+ 
+public static void main(String args[]) 
+{ 
+
+new student(); 
+} 
+} 
+ 
+ 
+ 
+ 
+Output: 
+sl2-pc5@sl2pc5-HP-Compaq-4000-Pro-SFF-PC:~$ 
+mysql -u root -p 
+Enter password: 
+Welcome to the MySQL monitor. Commands end with 
+; or \g. 
+Your MySQL connection id is 42 
+Server version: 5.5.61-0ubuntu0.14.04.1 (Ubuntu) 
+Copyright (c) 2000, 2018, Oracle and/or its 
+affiliates. All rights reserved. 
+Oracle is a registered trademark of Oracle 
+Corporation and/or itsaffiliates. Other names may be trademarks of 
+their respective 
+owners. 
+Type 'help;' or '\h' for help. Type '\c' to 
+clear the current input statement. 
+ 
+ 
+mysql> create database info; 
+Query OK, 1 row affected (0.03 sec) 
+ 
+mysql> use info; 
+Database changed 
+ 
+mysql> create table result (stud_RollNo int,stud_Name varchar(20),stud_Dept 
+varchar(20)); 
+Query OK, 0 rows affected (0.08 sec) 
+ 
+ 
+
+
+
+mysql> select *from result; 
++-------------+-----------+-----------+ 
+|  stud_RollNo|  stud_Name|  stud_Dept| 
++-------------+-----------+-----------+ 
+|      1 |       abc |      comp | 
++-------------+-----------+-----------+ 
+1 row in set (0.00 sec) 
+ 
+//ADD DATA 
+ 
+mysql> select *from result; 
++-------------+-----------+-----------+ 
+|  stud_RollNo|  stud_Name|  stud_Dept| 
++-------------+-----------+-----------+ 
+|      1 |    abc |  comp | 
+|       2 |    harsha |  comp | 
+|      3 |    tej |  comp | 
+|      4 |    rina |  mech | 
++-------------+-----------+-----------+ 
+4 rows in set (0.00 sec) 
+ 
+//DELETE DATA 
+ 
+mysql> select *from result; 
++-------------+-----------+-----------+ 
+|  stud_RollNo|  stud_Name|  stud_Dept| 
++-------------+-----------+-----------+ 
+|       2 |    harsha |      comp | 
+|      3 |    tej |      comp | 
+|       4 |   rina |      mech | 
++-------------+-----------+-----------+ 
+3 rows in set (0.00 sec)
