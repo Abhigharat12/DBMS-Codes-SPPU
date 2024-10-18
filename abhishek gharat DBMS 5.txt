@@ -1,0 +1,143 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+
+C:\Users\ABHISHEK GHARAT>mysql -u root -p
+
+
+Enter password: ****
+
+
+Welcome to the MySQL monitor. Commands end with ; or \g. Your MySQL connection id is 28
+
+Server version: 8.0.39 MySQL Community Server - GPL
+
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+
+
+affiliates. Other names may be trademarks of their respective
+
+
+owners.
+
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement. mysql> use abhishek;
+
+Database changed
+
+
+mysql> create table marks(roll_no int,name varchar(20),total_marks varchar(20)); Query OK, (c) rows affected (0.86 sec)
+
+mysql> create table result(roll_no int,name varchar(20),class varchar(20));
+
+Query OK, (c) rows affected (0.33 sec)
+
+
+mysql> INSERT INTO marks (roll_no, name, total_marks) VALUES
+-> (1, 'Abhishek', 1400),
+-> (2, 'Karan', 980),
+-> (3, 'Baliram', 880),
+-> (4, 'Vishwa', 820),
+-> (5, 'Amit', 740),
+-> (6, 'Shrinath', 640);
+Query OK, 6 rows affected (0.08 sec)
+Records: 6 Duplicates: (c) Warnings: 0
+
+
+mysql> DROP PROCEDURE IF EXISTS proc_result; Query OK, (c) rows affected, 1 warning (0.01 sec)
+
+mysql> DROP FUNCTION IF EXISTS final_result; Query OK, (c) rows affected, 1 warning (0.02 sec)
+
+mysql> delimiter //
+mysql> create procedure proc_result(in marks int, out
+-> class char(20))
+
+
+-> begin
+
+
+-> IF (marks >= 990 AND marks < 1500) THEN
+
+
+-> SET class = 'Distinction';
+
+
+-> ELSEIF (marks >= 890 AND marks < 990) THEN
+
+-> SET class = 'First Class';
+
+
+-> ELSEIF (marks >= 650 AND marks < 749) THEN
+-> SET class = 'Second Class';
+
+
+-> ELSEIF (marks >= 649 AND marks < 650) THEN
+-> SET class = 'Passed';
+
+
+-> ELSE
+
+
+-> SET class = 'Fail';
+
+
+-> END IF;
+
+
+-> END //
+
+
+Query OK, (c) rows affected (0.08 sec)
+
+
+
+
+
+mysql> DELIMITER ;
+
+
+mysql> DELIMITER //
+
+
+mysql>
+
+
+mysql> CREATE FUNCTION final_result(R1 INT)
+-> RETURNS CHAR(20)
+-> DETERMINISTIC
+
+-> BEGIN
+-> DECLARE fmarks INT;
+-> DECLARE grade CHAR(20);
+->
+-> SELECT total_marks INTO fmarks FROM marks WHERE roll_no = R1;
+->
+-> CALL proc_result(fmarks, grade);
+->
+-> RETURN grade;
+-> END //
+Query OK, (c) rows affected (0.07 sec) mysql>
+mysql> DELIMITER ; mysql>
+mysql> SELECT roll_no, name, final_result(roll_no) AS class FROM marks;
+
++	+	+	+
+
+| roll_no | name | class |
+
++	+	+	+
+
+| 1 | Abhishek | Distinction |
+| 2 | Karan | First Class |
+| 3 | Baliram | Fail |
+| 4 | Vishwa | Fail
+| 5 | Amit | Second Class |
+| 6 | Shrinath | Fail |
+
++	+	+	+
+
+
+6 rows in set (0.00 sec)

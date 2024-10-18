@@ -1,0 +1,337 @@
+Microsoft Windows [Version 10.0.19045.4780]
+(c) Microsoft Corporation. All rights reserved.
+
+
+C:\Users\Admin>color 0a
+
+
+C:\Users\Admin>mysql -u root -p Enter password: ****
+Welcome to the MySQL monitor. Commands end with ; or \g. Your MySQL connection id is 40
+Server version: 8.0.39 MySQL Community Server - GPL
+
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+
+mysql> show databases;
+
++	+
+
+| Database	|
+
++	+
+
+| abhi	|
+| info	|
+| information_schema |
+| mysql	|
+| performance_schema |
+| sys	|
+
++	+
+
+6 rows in set (0.00 sec)
+
+
+mysql> use info;
+Database changed
+mysql> create table info(roll_no int, name varchar(30), class varchar(20), marks float, dob
+-> date);
+Query OK, 0 rows affected (0.07 sec)
+
+
+mysql> insert into info values('1','abhishek','be','98.0','1996-07-12'); Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into info values('2','tej','te','98.1','1997-07-12'); Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into info values('2','keshav','te','98.2','1998-05-11'); Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from info;
+
++	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	|
+
++	+	+	+	+	+
+
+|	1 | abhishek | be  |  98 | 1996-07-12 |
+|	2 | tej	| te  | 98.1 | 1997-07-12 |
+|	2 | keshav | te  | 98.2 | 1998-05-11 |
+
++	+	+	+	+	+
+
+3 rows in set (0.00 sec)
+
+
+mysql> select roll_no,marks from info;
+
++	+	+
+
+| roll_no | marks |
+
++	+	+
+
+|	1 |  98 |
+|	2 | 98.1 |
+|	2 | 98.2 |
+
++	+	+
+
+3 rows in set (0.00 sec)
+
+
+mysql> delete from info where name='tej'; Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from info;
+
++	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	|
+
++	+	+	+	+	+
+
+|	1 | abhishek | be  |  98 | 1996-07-12 |
+|	2 | keshav | te  | 98.2 | 1998-05-11 |
+
++	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> create database new1;
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> show databases;
+
+++| Database|++| abhi|
+| info	|
+| information_schema |
+| mysql	|
+| new1	|
+| performance_schema |
+| sys	|
+
++	+
+
+7 rows in set (0.00 sec)
+
+
+mysql> drop database new1;
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> show databases;
+
++	+
+
+| Database	|
+
++	+
+
+| abhi	|
+| info	|
+| information_schema |
+| mysql	|
+| performance_schema |
+| sys	|
+
++	+
+
+6 rows in set (0.00 sec)
+
+
+mysql> use info; Database changed mysql> select*from info;
++	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	|
+
++	+	+	+	+	+
+
+|	1 | abhishek | be  |  98 | 1996-07-12 |
+|	2 | keshav | te  | 98.2 | 1998-05-11 |
+
++	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+mysql> update info set class='secomp' where roll_no='1'; Query OK, 1 row affected (0.02 sec)
+Rows matched: 1 Changed: 1 Warnings: 0
+
+
+mysql> select *from info;
+
++	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	|
+
++	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 |
+|	2 | keshav | te	| 98.2 | 1998-05-11 |
+
++	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> alter table info add sirname varchar(20); Query OK, 0 rows affected (0.06 sec)
+Records: 0 Duplicates: 0 Warnings: 0
+
+
+mysql> select*from info;
+
++	+	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	| sirname |
+
++	+	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 | NULL  |
+|	2 | keshav | te	| 98.2 | 1998-05-11 | NULL  |
+
++	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> alter table info modify roll_no float; Query OK, 2 rows affected (0.13 sec)
+Records: 2 Duplicates: 0 Warnings: 0
+
+
+mysql> select*from info;
+
++	+	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	| sirname |
+
++	+	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 | NULL  |
+|	2 | keshav | te	| 98.2 | 1998-05-11 | NULL  |
+
++	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> desc info;
+
++	+	+	+	+	+	+
+
+| Field | Type	| Null | Key | Default | Extra |
+
++	+	+	+	+	+	+
+
+| roll_no | float	| YES |	| NULL  |	|
+| name	| varchar(30) | YES |	| NULL  |	|
+| class | varchar(20) | YES |	| NULL  |	|
+| marks | float	| YES |	| NULL  |	|
+| dob	| date	| YES |	| NULL  |	|
+| sirname | varchar(20) | YES |	| NULL  |	|
+
++	+	+	+	+	+	+
+
+6 rows in set (0.02 sec)
+
+mysql> alter table info drop sirname; Query OK, 0 rows affected (0.04 sec) Records: 0 Duplicates: 0 Warnings: 0
+
+mysql> select*from info;
+
++	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	|
+
++	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 |
+|	2 | keshav | te	| 98.2 | 1998-05-11 |
+
++	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> alter table info add sirname varchar(20); Query OK, 0 rows affected (0.04 sec)
+Records: 0 Duplicates: 0 Warnings: 0
+
+
+mysql> select*from info;
+
++	+	+	+	+	+	+
+
+| roll_no | name	| class | marks | dob	| sirname |
+
++	+	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 | NULL  |
+|	2 | keshav | te	| 98.2 | 1998-05-11 | NULL  |
+
++	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> alter table info change name fullname varchar(20); Query OK, 2 rows affected (0.19 sec)
+Records: 2 Duplicates: 0 Warnings: 0
+
+mysql> select*from info;
+
++	+	+	+	+	+	+
+
+| roll_no | fullname | class | marks | dob	| sirname |
+
++	+	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 | NULL  |
+|	2 | keshav | te	| 98.2 | 1998-05-11 | NULL  |
+
++	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> insert into info values('101', 'sai', 'se','80','2017-1-12','xyz'); Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into info values('102', 'amit','se','90','2018-1-12','uvw'); Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from info;
+
++	+	+	+	+	+	+
+
+| roll_no | fullname | class | marks | dob	| sirname |
+
++	+	+	+	+	+	+
+
+|	1 | abhishek | secomp |  98 | 1996-07-12 | NULL  |
+|	2 | keshav | te	| 98.2 | 1998-05-11 | NULL  |
+|	101 | sai	| se	|  80 | 2017-01-12 | xyz	|
+|	102 | amit	| se	|  90 | 2018-01-12 | uvw	|
+
++	+	+	+	+	+	+
+
+4 rows in set (0.00 sec)
+
+
+mysql> create view te as select roll_no, fullname,class from info; Query OK, 0 rows affected (0.02 sec)
+
+mysql> select*from te;
+
++	+	+	+
+
+| roll_no | fullname | class |
+
++	+	+	+ |
+
+| 1 | abhishek | secomp
+| 2 | keshav | te |
+| 101 | sai | se |
+| 102 | amit | se |
+
++	+	+	+
+
+4 rows in set (0.00 sec)

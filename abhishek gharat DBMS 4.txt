@@ -1,0 +1,141 @@
+Microsoft Windows [Version 10.0.19045.4894]
+(c) Microsoft Corporation. All rights reserved.
+
+
+C:\Users\ABHISHEK GHARAT>COLOR 0A
+
+
+C:\Users\Admin>mysql -u root -p Enter password: ****
+Welcome to the MySQL monitor. Commands end with ; or \g. Your MySQL connection id is 8
+Server version: 8.0.39 MySQL Community Server - GPL
+
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement mysql> use library;
+Database changed
+mysql> CREATE TABLE Borrower (
+->	Rollno INT(4),
+->	Name VARCHAR(20),
+->	DateofIssue DATE,
+->	NameofBook VARCHAR(30),
+->	Status VARCHAR(10)
+-> );
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql> INSERT INTO Borrower VALUES
+-> (41, 'Abhisek', '2022-09-19', 'Operating System', 'I'),
+-> (05, 'Karan', '2022-07-24', 'Object Oriented Programming', 'I'),
+-> (23, 'Baliram', '2022-06-12', 'Microprocessor', 'I'),
+-> (48, 'Mayur', '2022-04-19', 'Mechanics', 'I'),
+-> (47, 'Sanket', '2022-05-20', 'DS', 'I'),
+-> (25, 'Vishwa', '2022-06-21', 'DELD', 'I');
+Query OK, 6 rows affected (0.01 sec) Records: 6 Duplicates: 0 Warnings: 0
+
+mysql> CREATE TABLE Fine (
+->	Rollno INT(4),
+->	Date DATE,
+->	Amount INT(10)
+-> );
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+
+mysql>
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE calc_Fine(IN r INT, IN b VARCHAR(30))
+-> BEGIN
+->	DECLARE doi DATE;
+->	DECLARE diff INT;
+-> SELECT DateofIssue INTO doi
+->	FROM Borrower
+->	WHERE Rollno = r AND NameofBook = b;
+-> SELECT DATEDIFF(CURDATE(), doi) INTO diff;
+-> IF diff >= 15 AND diff <= 30 THEN
+->	INSERT INTO Fine VALUES(r, CURDATE(), diff * 5);
+
+->	END IF;
+-> IF diff > 30 THEN
+->	INSERT INTO Fine VALUES(r, CURDATE(), diff * 50);
+->	END IF;
+-> END //
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> CREATE PROCEDURE submit(IN r INT)
+-> BEGIN
+->	UPDATE Borrower SET Status = 'R' WHERE Rollno = r;
+->	DELETE FROM Fine WHERE Rollno = r;
+-> END //
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> DELIMITER ;
+mysql> CALL calc_Fine(41, 'Operating System'); Query OK, 1 row affected (0.02 sec)
+
+mysql> CALL calc_Fine(05, 'Object Oriented Programming'); Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL calc_Fine(23, 'Microprocessor'); Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL calc_Fine(48, 'Mechanics'); Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL calc_Fine(47, 'DS');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CALL calc_Fine(25, 'DELD'); Query OK, 1 row affected (0.00 sec)
+
+mysql> SELECT * FROM Fine;
+
++	+	+	+
+
+| Rollno | Date	| Amount |
+
++	+	+	+
+
+|	41 | 2024-10-10 | 37600 |
+|	5 | 2024-10-10 | 40450 |
+|	23 | 2024-10-10 | 42550 |
+|	48 | 2024-10-10 | 45250 |
+|	47 | 2024-10-10 | 43700 |
+|	25 | 2024-10-10 | 42100 |
+
++	+	+	+
+
+6 rows in set (0.00 sec)
+
+
+mysql> CALL submit(41);
+Query OK, 1 row affected (0.02 sec)
+
+
+mysql> CALL submit(05);
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> CALL submit(23);
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> CALL submit(48);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CALL submit(47);
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> CALL submit(25);
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql>
+mysql> SELECT * FROM Fine; Empty set (0.00 sec)
+
+mysql> SELECT * FROM Borrower;
+
++	+	+	+	+	+
+
+| Rollno | Name | DateofIssue | NameofBook	| Status |
+
+++++++|41 | Abhisek | 2022-09-19 | Operating System| R||5 | Karan | 2022-07-24 | Object Oriented Programming| R	||23 | Baliram | 2022-06-12 | Microprocessor	| R||48 | Mayur | 2022-04-19 | Mechanics	| R	||47 | Sanket | 2022-05-20 | DS	| R	||25 | Vishwa | 2022-06-21 | DELD	| R	|++++++6 rows in set (0.00 sec)

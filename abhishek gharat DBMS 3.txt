@@ -1,0 +1,340 @@
+Microsoft Windows [Version 10.0.19045.4780]
+(c) Microsoft Corporation. All rights reserved.
+
+
+C:\Users\Admin>color 0a
+
+
+C:\Users\Admin>mysql -u root -p Enter password: ****
+Welcome to the MySQL monitor. Commands end with ; or \g. Your MySQL connection id is 43
+Server version: 8.0.39 MySQL Community Server - GPL
+
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+
+mysql> show databases;
+
++	+
+
+| Database	|
+
++	+
+
+| abhi	|
+| info	|
+| information_schema |
+| mysql	|
+| performance_schema |
+| sys	|
+
++	+
+
+6 rows in set (0.01 sec) mysql> use abhi Database changed
+mysql> create table abhi(Seat_no int,Roll_no int,Name varchar(20),department varchar(20),Year_of_study int,DOB date,Mobile_no int,Email varchar(30));
+Query OK, 0 rows affected (0.05 sec)
+mysql> insert into abhi values('3214','23','abhishek','computer','3','2003-10- 4','87882','abhi@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> insert into abhi values('3215','43','mayur','computer','3','2004-1-4','94362','mayur@gmail.com'); Query OK, 1 row affected (0.01 sec)
+mysql> select*from abhi;
+
++	+	+	+	+	+	+	+	+
+
+| Seat_no | Roll_no | Name	| department | Year_of_study | DOB	| Mobile_no | Email	|
+
++	+	+	+	+	+	+	+	+
+
+|	3214 |	23 | abhishek | computer |	3 | 2003-10-04 |	87882 | abhi@gmail.com |
+|	3215 |	43 | mayur  | computer |	3 | 2004-01-04 |	94362 | mayur@gmail.com |
+
++	+	+	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+mysql> create view te as select Seat_no,Roll_no,Name,department from abhi; Query OK, 0 rows affected (0.01 sec)
+
+mysql> select*from abhi;
+
++	+	+	+	+	+	+	+	+
+
+| Seat_no | Roll_no | Name	| department | Year_of_study | DOB	| Mobile_no | Email	|
+
++	+	+	+	+	+	+	+	+
+
+|	3214 |	23 | abhishek | computer |	3 | 2003-10-04 |	87882 | abhi@gmail.com |
+
+|	3215 |	43 | mayur  | computer |	3 | 2004-01-04 |	94362 | mayur@gmail.com |
+
++	+	+	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+mysql> select Seat_no,Name from abhi;
+
++	+	+
+
+| Seat_no | Name	|
+
++	+	+
+
+|	3214 | abhishek |
+|	3215 | mayur  |
+
++	+	+
+
+2 rows in set (0.00 sec)
+
+
+mysql> desc abhi;
+
++	+	+	+	+	+	+
+
+| Field	| Type	| Null | Key | Default | Extra |
+
++	+	+	+	+	+	+
+
+| Seat_no	| int	| YES |	| NULL  |	|
+| Roll_no	| int	| YES |	| NULL  |	|
+| Name	| varchar(20) | YES |	| NULL  |	|
+| department  | varchar(20) | YES |	| NULL  |	|
+| Year_of_study | int	| YES |	| NULL  |	|
+| DOB	| date	| YES |	| NULL  |	|
+| Mobile_no	| int	| YES |	| NULL  |	|
+| Email	| varchar(30) | YES |	| NULL  |	|
+
++	+	+	+	+	+	+
+
+8 rows in set (0.00 sec)
+mysql> create table sakshi(roll_no int,name char(20),student_id int,department char(10)); Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into sakshi values('1','XYZ','111','CS' ),('2',' PQR','112','CS'),('3','SUV','113','CS'), ('4','LMN','114','CS'),('5','GHI','115','IT');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5 Duplicates: 0 Warnings: 0
+mysql> create table sakshi1(roll_no int, prn_no int, mobile_no int, year char(10)); Query OK, 0 rows affected (0.06 sec)
+mysql> insert into Sakshil values('2', '101', '987654', Third');d'); Query OK, 1 row affected (0.01 sec)
+mysql> select*from sakshi1;
+
++	+	+	+	+
+
+| roll_no | prn_no | mobile_no | year |
+
++	+	+	+	+
+
+|	2 |  101 |  983464 | Third |
+
++	+	+	+	+
+
+1 row in set (0.00 sec)
+mysql> insert into sakshi1 values('3','102','123456','Third'),('4','103','846372','Third'),('5','104', '352718','Third');
+Query OK, 3 rows affected (0.01 sec) Records: 3 Duplicates: 0 Warnings: 0 mysql> select *from sakshi;
++	+	+	+	+
+
+| roll_no | name | student_id | department |
+
++	+	+	+	+
+
+|	1 | XYZ |	111 | CS	|
+|	2 | PQR |	112 | CS	|
+|	3 | SUV |	113 | CS	|
+|	4 | LMN |	114 | CS	|
+|	5 | GHI |	115 | IT	|
+
++	+	+	+	+
+
+5 rows in set (0.00 sec)
+
+
+mysql> select *from sakshi1;
+
++	+	+	+	+
+
+| roll_no | prn_no | mobile_no | year |
+
++	+	+	+	+
+
+|	2 |  101 |  983464 | Third |
+|	3 |  102 |  123456 | Third |
+|	4 |  103 |  846372 | Third |
+|	5 |  104 |  352718 | Third |
+
++	+	+	+	+
+
+4 rows in set (0.00 sec)
+mysql> select *from sakshi inner join sakshi1 on sakshi.roll_no=sakshi1.roll_no;
+
++	+	+	+	+	+	+	+	+
+
+| roll_no | name | student_id | department | roll_no | prn_no | mobile_no | year |
+
++	+	+	+	+	+	+	+	+
+
+|2 | PQR |112 | CS|2 |101 |983464 | Third ||3 | SUV |113 | CS|3 |102 |123456 | Third ||4 | LMN |114 | CS|4 |103 |846372 | Third |
+|	5 | GHI |	115 | IT	|	5 |  104 |  352718 | Third |
+
++	+	+	+	+	+	+	+	+
+
+4 rows in set (0.00 sec)
+mysql> select *from sakshi left outer join sakshi1 on sakshi.roll_no=sakshi1.roll_no;
+
++	+	+	+	+	+	+	+	+
+
+| roll_no | name | student_id | department | roll_no | prn_no | mobile_no | year |
+
++	+	+	+	+	+	+	+	+
+
+|	1 | XYZ |	111 | CS	|  NULL | NULL |	NULL | NULL |
+
+|2 | PQR |112 | CS|2 |  101 |  983464 | Third ||3 | SUV |113 | CS|3 |  102 |  123456 | Third |
+|	4 | LMN |	114 | CS	|	4 |  103 |  846372 | Third |
+|	5 | GHI |	115 | IT	|	5 |  104 |  352718 | Third |
+
++	+	+	+	+	+	+	+	+
+
+5 rows in set (0.00 sec)
+mysql> select *from sakshi right outer join sakshi1 on sakshi.roll_no=sakshi1.roll_no;
+
++	+	+	+	+	+	+	+	+
+
+| roll_no | name | student_id | department | roll_no | prn_no | mobile_no | year |
+
++	+	+	+	+	+	+	+	+
+
+|	2 | PQR |	112 | CS	|	2 |  101 |  983464 | Third |
+|	3 | SUV |	113 | CS	|	3 |  102 |  123456 | Third |
+|	4 | LMN |	114 | CS	|	4 |  103 |  846372 | Third |
+|	5 | GHI |	115 | IT	|	5 |  104 |  352718 | Third |
+
++	+	+	+	+	+	+	+	+
+
+4 rows in set (0.00 sec) mysql> select *from abhi;
++	+	+	+	+	+	+	+	+
+
+| Seat_no | Roll_no | Name	| department | Year_of_study | DOB	| Mobile_no | Email	|
+
++++++++++|3214 |23 | abhishek | computer |3 | 2003-10-04 |87882 | abhi@gmail.com ||3215 |43 | mayur  | computer |3 | 2004-01-04 |94362 | mayur@gmail.com |+++++++++2 rows in set (0.00 sec)
+
+
+mysql> select *from abhi where Email is not null;
+
++	+	+	+	+	+	+	+	+
+
+| Seat_no | Roll_no | Name	| department | Year_of_study | DOB	| Mobile_no | Email	|
+
++++++++++|3214 |23 | abhishek | computer |3 | 2003-10-04 |87882 | abhi@gmail.com ||3215 |43 | mayur  | computer |3 | 2004-01-04 |94362 | mayur@gmail.com |
++	+	+	+	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+mysql> create table employee(Emp_id int,Emp_name char(20),join_date date,Position Char(20),Salary int);
+Query OK, 0 rows affected (0.07 sec)
+
+
+mysql> insert into employee values('1','abhi','2019-05-14','CEO','500000'); Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('2','omkar','2017-08-29','HR','87000'); Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('3','abbhinay','2019-09-09','HR','75000'); Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values('4','ashish','2011-06-09','CEO','750000'); Query OK, 1 row affected (0.01 sec)
+mysql> select *from employee;
+
++	+	+	+	+	+
+
+| Emp_id | Emp_name | join_date | Position | Salary |
+
++	+	+	+	+	+
+
+|	1 | abhi	| 2019-05-14 | CEO	| 500000 |
+|	2 | omkar  | 2017-08-29 | HR	| 87000 |
+|	3 | abbhinay | 2019-09-09 | HR	| 75000 |
+|	4 | ashish | 2011-06-09 | CEO	| 750000 |
+
++	+	+	+	+	+
+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where emp_name=omkar';
+
++	+	+	+	+	+
+
+| Emp_id | Emp_name | Join_date | Position | Salary |
+
++	+	+	+	+	+
+
+| 2 | omkar | 2017-08-29 | HR | 87000 |
+
++	+	+	+	+	+
+
+1 row in set (0.01 sec)
+mysql> select salary from employee where emp_name='omkar';
+
++	+
+
+| salary |
+
++	+
+
+| 87000 |
+
++	+
+
+1 row in set (0.00 sec)
+mysql> select * from employee where salary >(select salary from employee where emp_name='omkar');
++	+	+	+	+	+
+
+| Emp_id | Emp_name | Join_date | Position | Salary |
+
++	+	+	+	+	+
+
+| 1 |abhi| 2019-05-14 | CEO | 500000 |
+| 4 | ashish| 2011-06-09 | CEO | 750000 |
+
++	+	+	+	+	+
+
+2 rows in set (0.01 sec)
+mysql> select * from employee where position = (select position employee where emp_name='abhi');
+
++	+	+	+	+	+
+
+| Emp_id | Emp_name | Join_date | Position | Salary |
+
++	+	+	+	+	+
+
+| 1 |abhi| 2019-05-14 | CEO | 500000 |
+
++	+	+	+	+	+
+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where position = (select position from employee where emp_name='abhi');
+
++	+	+	+	+	+
+
+| Emp_id | Emp_name | Join_date | Position | Salary |
+
++	+	+	+	+	+
+
+| 1 |abhi| 2019-05-14 | CEO | 500000 |
+| 4 | ashish | 2011-06-09 | CEO | 750000 |
+
++	+	+	+	+	+
+
+2 rows in set (0.00 sec)
+mysql> select * from employee where position in (select position from employee where emp_name='abhi');
+
++	+	+	+	+	+
+
+| Emp_id | Emp_name | Join_date | Position | Salary |
+
++	+	+	+	+	+
+
+| 1 |abhi| 2019-05-14 | CEO | 500000 |
+| 4 | ashish | 2011-06-09 | CEO | 750000 |
+
++	+	+	+	+	+
+
+2 rows in set (0.01 sec)
