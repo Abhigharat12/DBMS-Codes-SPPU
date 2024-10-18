@@ -1,0 +1,120 @@
+
+Please enter a MongoDB connection string (Default: mongodb://localhost/): mongodb:
+mongodb:
+Current Mongosh Log ID: 651a5bb6d2cc8e767d9fb00a Connecting :
+mongodb://127.0.0.1:27017/mongodb?directConnection=true&serverSelectionTimeoutMS=2000 &appName=mongosh+1.10.6
+Using MongoDB: 7.0.1 Using Mongosh: 1.10.6
+mongosh 2.0.1 is available for download: https://www.mongodb.com/try/download/shell For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+------
+The server generated these startup warnings when booting
+2023-09-30T22:09:56.935+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+mongodb> show dbs
+AK72.00KiBAbhishek8.00KiBadmin40.00KiBconfig108.00KiBlocal40.00KiBmongodb> use AK switched to db AK
+AK> db.createCollection('website');
+{ ok: 1 }
+AK> db.website.insertMany
+([{'Roll':'1','Name':'Abhishek','Amount':1000,'URL':'www.yahoo.com'},
+{'Roll':'2','Name':'Shubham','Amount':2000,'URL':'www.yahoo.com'},
+{'Roll':'3','Name':'Amit','Amount':3000,'URL':'www.google.com'},
+{'Roll':'4','Name':'Shrinath','Amount':4000,'URL':'www.gmail.com'},
+{'Roll':'5','Name':'Shrinath','Amount':1000,'URL':'www.pvg.com'}]);
+{
+acknowledged: true,
+insertedIds: {
+'0': ObjectId("651a5c17d2cc8e767d9fb00b"),
+'1': ObjectId("651a5c17d2cc8e767d9fb00c"),
+'2': ObjectId("651a5c17d2cc8e767d9fb00d"),
+'3': ObjectId("651a5c17d2cc8e767d9fb00e"),
+'4': ObjectId("651a5c17d2cc8e767d9fb00f")
+}
+}
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$sum:"$Amount"}}}); [
+{ _id: 'Amit', Total: 3000 },
+{ _id: 'Shrinath', Total: 5000 },
+{ _id: 'Abhishek', Total: 1000 },
+{ _id: 'Shubham', Total: 2000 }
+]
+
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$avg:"$Amount"}}}); [
+{ _id: 'Amit', Total: 3000 },
+{ _id: 'Shrinath', Total: 2500 },
+{ _id: 'Abhishek', Total: 1000 },
+{ _id: 'Shubham', Total: 2000 }
+]
+
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$min:"$Amount"}}}); [
+{ _id: 'Abhishek', Total: 1000 },
+{ _id: 'Amit', Total: 3000 },
+{ _id: 'Shrinath', Total: 1000 },
+{ _id: 'Shubham', Total: 2000 }
+]
+
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$max:"$Amount"}}}); [
+{ _id: 'Abhishek', Total: 1000 },
+{ _id: 'Amit', Total: 3000 },
+{ _id: 'Shrinath', Total: 4000 },
+{ _id: 'Shubham', Total: 2000 }
+]
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$first:"$Amount"}}}); [
+{ _id: 'Abhishek', Total: 1000 },
+{ _id: 'Amit', Total: 3000 },
+{ _id: 'Shrinath', Total: 4000 },
+{ _id: 'Shubham', Total: 2000 }
+]
+
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$last:"$Amount"}}}); [
+{ _id: 'Amit', Total: 3000 },
+{ _id: 'Shubham', Total: 2000 },
+{ _id: 'Abhishek', Total: 1000 },
+{ _id: 'Shrinath', Total: 1000 }
+]
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$push:"$Amount"}}}); [
+{ _id: 'Shubham', Total: [ 2000 ] },
+{ _id: 'Abhishek', Total: [ 1000 ] },
+{ _id: 'Shrinath', Total: [ 4000, 1000 ] },
+{ _id: 'Amit', Total: [ 3000 ] }
+]
+
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$sum:1}}}); [
+{ _id: 'Abhishek', Total: 1 },
+{ _id: 'Amit', Total: 1 },
+{ _id: 'Shrinath', Total: 2 },
+{ _id: 'Shubham', Total: 1 }
+]
+
+AK> db.website.aggregate({$group:{_id:"$Name","Total":{$addToSet:"$Amount"}}}); [
+{ _id: 'Abhishek', Total: [ 1000 ] },
+{ _id: 'Amit', Total: [ 3000 ] },
+{ _id: 'Shrinath', Total: [ 4000, 1000 ] },
+{ _id: 'Shubham', Total: [ 2000 ] }
+]
+
+AK> db.createCollection('website1');
+{ ok: 1 }
+AK> db.website1.insertOne({'r':1,'name':'xyz'});
+{
+acknowledged: true,
+insertedId: ObjectId("651a61a9d2cc8e767d9fb010")
+}
+AK> db.website1.find().pretty();
+[ { _id: ObjectId("651a61a9d2cc8e767d9fb010"), r: 1, name: 'xyz' } ]
+
+AK>	db.website1.createIndex({'name':1}) name_1
+AK>	db.website1.createIndex({'name':-1}) name_-1
+
+AK> db.website1.getIndexes() [
+{ v: 2, key: { _id: 1 }, name: '_id_' },
+{ v: 2, key: { name: 1 }, name: 'name_1' },
+{ v: 2, key: { name: -1 }, name: 'name_-1' }
+]
+
+AK> db.website1.createIndex({'name':2}); name_2
+AK> db.website1.getIndexes(); [
+{ v: 2, key: { _id: 1 }, name: '_id_' },
+{ v: 2, key: { name: 1 }, name: 'name_1' },
+{ v: 2, key: { name: -1 }, name: 'name_-1' },
+{ v: 2, key: { name: 2 }, name: 'name_2' }
+]
+AK> db.website.dropIndex({'name':-1});
+MongoshInternalError: can't find index with key: { name: -1 }
