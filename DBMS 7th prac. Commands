@@ -1,0 +1,61 @@
+CREATE DATABASE tri;
+
+
+
+USE tri;
+
+
+
+CREATE TABLE notebook (
+
+    notebook VARCHAR(50),
+
+    price INT,
+
+    quantity INT
+
+);
+
+
+
+DESC notebook;
+
+
+
+CREATE TRIGGER N1    
+
+BEFORE INSERT   
+
+ON notebook    
+
+FOR EACH ROW    
+
+SET NEW.price = NEW.price + 7;
+
+
+
+INSERT INTO notebook VALUES
+
+    ('Classmate', 65, 300),
+
+    ('Sundaram', 62, 200);
+
+
+
+SELECT * FROM notebook;
+
+
+
+UPDATE notebook SET quantity = 15 WHERE notebook = 'Classmate';
+
+
+
+SELECT * FROM notebook;
+
+
+
+DELETE FROM notebook WHERE price = 69;
+
+
+
+SELECT * FROM notebook;
